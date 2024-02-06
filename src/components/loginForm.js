@@ -8,12 +8,14 @@ import axios from 'axios';
 import { AuthContext } from '../context/auth-context';
 
 export const LoginForm = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const { login } = useContext(AuthContext);
 
   const handleLogin = async (data) => {
     try {
       // Make sure to replace `YOUR_API_URL` with the actual URL.
-      const response = await axios.post('YOUR_API_URL/api/login', data);
+      const response = await axios.post('${apiUrl}/api/login', data);
       console.log(response.data);
       // Perform actions with the response data, like storing auth tokens
       // localStorage.setItem('token', response.data.token);
