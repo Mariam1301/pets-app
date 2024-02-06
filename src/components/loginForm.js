@@ -12,19 +12,15 @@ export const LoginForm = () => {
 
   const { login } = useContext(AuthContext);
 
-  const handleLogin = async (data) => {
+  const handleLogin = async ({ email, password }) => {
     try {
-      // Make sure to replace `YOUR_API_URL` with the actual URL.
-      const response = await axios.post('${apiUrl}/api/login', data);
-      console.log(response.data);
-      // Perform actions with the response data, like storing auth tokens
-      // localStorage.setItem('token', response.data.token);
-      // login() should be used here if it sets the user state in your context
-      login(response.data);
-    } catch (error) {
-      console.error('There was an error!', error);
-    }
-  };
+        const response = await axios.post(`${apiUrl}/api/login`, { email, password });
+        console.log(response.data);
+
+      } catch (error) {
+        console.error('There was an error!', error);
+      }
+    };
 
   const formik = useFormik({
     initialValues: {
