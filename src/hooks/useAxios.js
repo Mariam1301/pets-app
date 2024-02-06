@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 // import objectToQueryParams from "../utils/objectToQueryParams";
 
-const BASE_URL = "http://62.3.32.232";
+const BASE_URL = "https://62.3.32.232:8080";
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
