@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router";
 import { AuthContext } from "../context/auth-context";
 import LoginPage from "../features/login-page";
 import MainPage from "../features/main-page";
+import AddPetPage from "../features/add-pet";
 import RegistrationPage from "../features/registration-page";
 
 const WrapperComponent = () => {
@@ -10,6 +11,7 @@ const WrapperComponent = () => {
       <Route path="/about" element={<MainPage />} />
       <Route path="/services" element={() => <div>services</div>} />
       <Route path="/contact" element={() => <div>contact</div>} />
+      <Route path="/addPet" element={<AddPetPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={<MainPage />} />

@@ -39,11 +39,21 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
+          <Link
+            onClick={() => setIsSidebarVisible(false)}
+            className="text-blue-950"
+            to="/addPet"
+          >
+            Add Pet
+          </Link>
+        </li>
+
+        <li>
           {userToken ? (
             <Link
               onClick={() => setIsSidebarVisible(false)}
               className="px-6 py-2 primary-color rounded-md hover:opacity-50 text-blue-950"
-              to="/"
+              to="/addPet"
             >
               Add Pet
             </Link>
@@ -63,8 +73,8 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="h-20 md:flex items-center justify-center hidden">
-        <div className="flex  items-center justify-between text-l  w-full mx-auto px-20">
+      <nav className="h-20 sm:flex items-center justify-center hidden">
+        <div className="flex  items-center justify-between text-l  w-full mx-auto lg:px-20 px-10">
           <p to="/" className="text-2xl ">
             Logo
           </p>
@@ -73,7 +83,7 @@ const Navbar = () => {
           </ul>
         </div>
       </nav>
-      <div className="h-20 p-5 md:hidden flex justify-between">
+      <div className="h-20 p-5 sm:hidden flex justify-between">
         <button onClick={() => setIsSidebarVisible(true)}>
           <FeatherIcon icon="menu" size={24} />
         </button>

@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("userToken", res.data.token);
         setUserToken(res.data.token);
       } else {
-        handleError ? handleError() : alert("Invalid User");
+        handleError ? handleError() : console.log(res);
       }
     } catch (error) {
       console.error("Login error:", error);

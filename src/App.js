@@ -9,7 +9,7 @@ import WrapperComponent from "./components/wrapper-component.js";
 
 function App() {
   return (
-    <div className="page-color min-h-screen md:px-28 ">
+    <div className="page-color min-h-screen lg:px-28 ">
       <Navbar />
       <div className="py-12 w-full mx-auto lg:px-20 px-5">
         <WrapperComponent />

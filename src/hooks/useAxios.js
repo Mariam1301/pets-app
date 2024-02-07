@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-// import objectToQueryParams from "../utils/objectToQueryParams";
+import objectToQueryParams from "../utils";
 
-const BASE_URL = "http://62.3.32.232";
+const BASE_URL = "https://62.3.32.232";
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
-    "Content-Type": "application/json",
-    Accept: "*/*",
-    "Accept-Encoding": "gzip, deflate, br"
+    "Content-Type": "application/json"
   }
 });
 
@@ -41,8 +39,11 @@ const useAxios = () => {
         ...requestConfig,
         signal: ctrl.signal
       };
+
       const requestUrl =
-        method.toLowerCase() === "get" ? `${url}?${requestConfig.params}` : url;
+        method.toLowerCase() === "get"
+          ? `${url}?${objectToQueryParams(requestConfig.params)}`
+          : url;
       res = await axiosInstance[method.toLowerCase()](
         requestUrl,
         requestOptions
@@ -67,7 +68,7 @@ const useAxios = () => {
         : errorMessage;
 
       if (configObj.showDefaultMessage) {
-        console.log("err", errorToShow);
+        console.log("err", err, errorToShow);
         // Toast.show({
         //   type: "error",
         //   position: "top",
