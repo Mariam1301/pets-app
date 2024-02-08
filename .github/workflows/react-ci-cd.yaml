@@ -13,11 +13,14 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
+    - name: Cache Node modules
+      uses: actions/cache@v2
       with:
-        node-version: '14'
-        
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
     - name: Deploy to Server
       uses: appleboy/ssh-action@master
       with:
@@ -25,9 +28,14 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
-          cd /var/www/pets-app
-          git pull https://x-access-token:${{ secrets.TOKEN_GITHUB }}@github.com/blackfrankwhite/pets-app.git
+          if [ -d "/var/www/pets-app" ]; then
+            cd /var/www/pets-app
+            git pull
+          else
+            git clone https://x-access-token:${{ secrets.TOKEN_GITHUB }}@github.com/blackfrankwhite/pets-app.git /var/www/pets-app
+            cd /var/www/pets-app
+          fi
           source /home/admin/.nvm/nvm.sh
           nvm use 14
-          npm install
+          npm ci
           npm run build
