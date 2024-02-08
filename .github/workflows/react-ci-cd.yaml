@@ -17,17 +17,18 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '14'
-        
-    - name: Deploy to Server
+
+    - name: Install dependencies and build
+      run: |
+        npm install
+        npm run build
+
+    - name: Copy build to server
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.SERVER_IP }}
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
-        script: |
-          cd /var/www/pets-app
-          git pull https://x-access-token:${{ secrets.TOKEN_PETS_APP }}@github.com/Mariam1301/pets-app.git
-          composer install --no-interaction --optimize-autoloader
-          npm install
-          npm run build
+        source: "build/"
+        target: "/var/www/pets-app"
         
