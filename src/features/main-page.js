@@ -6,7 +6,7 @@ const MainPage = () => {
       <div className="w-full flex-col md:flex-row flex justify-between mx-auto  gap-10">
         <div className="md:w-1/2">
           <h1 className="text-neutral-900 text-3xl mb-5 font-semibold">
-            testestsetset testt tset
+            nubs nubs nubadi
           </h1>
           <p className="text-neutral-900">
             testsetsetsetsetsetsetset testsetsetsetsetsetsetset
