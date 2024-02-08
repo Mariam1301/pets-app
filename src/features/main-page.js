@@ -9,8 +9,6 @@ const MainPage = () => {
             nubs nubs nubadi
           </h1>
           <p className="text-neutral-900">
-            testsetsetsetsetsetsetset testsetsetsetsetsetsetset
-            testsetsetsetsetsetsetset testsetsetsetsetsetsetset
             testsetsetsetsetsetsetset
           </p>
         </div>
