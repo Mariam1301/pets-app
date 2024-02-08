@@ -26,6 +26,6 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
           cd /var/www/pets-app
-          git pull
+          git pull https://x-access-token:${{ secrets.TOKEN_GITHUB }}@github.com/blackfrankwhite/pets-app.git
           npm install
           npm run build
