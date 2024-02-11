@@ -1,11 +1,23 @@
 import FeatherIcon from "feather-icons-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { Dialog } from "primereact/dialog";
 import { useState } from "react";
 import AddPetForm from "../components/addPetForm";
+import useAxios from "../hooks/useAxios";
+import PetItem from "../components/petItem";
 
 const AddPetPage = () => {
   const [visible, setVisible] = useState(false);
+
+  const [getPets, getPetsResponse] = useAxios();
+
+  function handlePetFetch() {
+    getPets({ method: "GET", url: "/api/pet" });
+  }
+
+  useEffect(() => {
+    handlePetFetch();
+  }, []);
 
   return (
     <div>
@@ -16,6 +28,12 @@ const AddPetPage = () => {
         <FeatherIcon icon="plus" color="white" size={50} />
       </button>
 
+      <div className="flex flex-wrap gap-5 justify-between my-10">
+        {[1, 2, 3].map(() => (
+          <PetItem></PetItem>
+        ))}
+      </div>
+
       <Dialog
         visible={visible}
         onHide={() => setVisible(false)}
@@ -25,7 +43,7 @@ const AddPetPage = () => {
         resizable={false}
         breakpoints={{ "960px": "75vw", "641px": "100vw" }}
       >
-        <AddPetForm />
+        <AddPetForm onPetAdd={handlePetFetch} />
       </Dialog>
     </div>
   );

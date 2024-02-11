@@ -9,8 +9,6 @@ const WrapperComponent = () => {
   return (
     <Routes>
       <Route path="/about" element={<MainPage />} />
-      <Route path="/services" element={() => <div>services</div>} />
-      <Route path="/contact" element={() => <div>contact</div>} />
       <Route path="/addPet" element={<AddPetPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
       <Route path="/login" element={<LoginPage />} />

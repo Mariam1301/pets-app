@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useFormik } from "formik";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -6,17 +6,22 @@ import { FileUpload } from "primereact/fileupload";
 import { classNames } from "primereact/utils";
 import { Tooltip } from "primereact/tooltip";
 import FeatherIcon from "feather-icons-react";
+import useAxios from "../hooks/useAxios";
 
-export const AddPetForm = () => {
-  //   const { addPet } = useContext(PetContext);
+export const AddPetForm = ({ onPetAdd }) => {
+  const [addPet, addPetResponse] = useAxios();
 
   function handleAddPet({ name, breed, birth_year, image }) {
-    // addPet({
-    //   method: "POST",
-    //   url: "addpet",
-    //   requestConfig: { data: { name, breed, birth_year, image } }
-    // });
+    addPet({
+      method: "POST",
+      url: "addpet",
+      requestConfig: { data: { name, breed, birth_year, image } }
+    });
   }
+
+  useEffect(() => {
+    addPetResponse && onPetAdd();
+  }, [addPetResponse]);
 
   const formik = useFormik({
     initialValues: {

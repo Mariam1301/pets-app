@@ -20,24 +20,7 @@ const Navbar = () => {
             About
           </Link>
         </li>
-        <li>
-          <Link
-            onClick={() => setIsSidebarVisible(false)}
-            className="text-blue-950"
-            to="/services"
-          >
-            Services
-          </Link>
-        </li>
-        <li>
-          <Link
-            onClick={() => setIsSidebarVisible(false)}
-            className="text-blue-950"
-            to="/contact"
-          >
-            Contact
-          </Link>
-        </li>
+
         <li>
           <Link
             onClick={() => setIsSidebarVisible(false)}
