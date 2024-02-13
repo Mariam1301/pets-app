@@ -22,7 +22,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Deploy to Server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@main
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SSH_USERNAME }}
@@ -30,6 +30,7 @@ jobs:
           script: |
             if [ -d "/var/www/pets-app" ]; then
               cd /var/www/pets-app
+              git checkout main
               git pull
             else
               git clone https://x-access-token:${{ secrets.TOKEN_GITHUB }}@github.com/blackfrankwhite/pets-app.git /var/www/pets-app
