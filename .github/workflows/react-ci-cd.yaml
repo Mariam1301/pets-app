@@ -1,0 +1,41 @@
+name: React CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            if [ -d "/var/www/pets-app" ]; then
+              cd /var/www/pets-app
+              git pull
+            else
+              git clone https://x-access-token:${{ secrets.TOKEN_GITHUB }}@github.com/blackfrankwhite/pets-app.git /var/www/pets-app
+              cd /var/www/pets-app
+            fi
+            source /home/admin/.nvm/nvm.sh
+            nvm use 14
+            npm ci
+            npm run build
