@@ -153,6 +153,28 @@ export const fetchPetLocations = async (petId) => {
       throw error;
     }
   };
+
+  export const signup = async (signupDetails) => {
+    console.log(process.env.REACT_APP_API_BASE_URL)
+    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/register`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(signupDetails)
+    });
+
+    if (!response.ok) {
+        const data = await response.json();
+        const error = data.message || 'An error occurred. Please try again.';
+        if (response.status === 401) {
+            throw new Error('Invalid credentials');
+        } else {
+            throw new Error(error);
+        }
+    }
+    return response.json();
+};
   
 
 
