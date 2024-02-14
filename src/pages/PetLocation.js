@@ -9,7 +9,9 @@ export default function PetLocation() {
 
     useEffect(() => {
         const handleSuccess = async (position) => {
-            const { latitude, longitude } = position.coords;
+            const latitude = position.coords.latitude.toString();
+            const longitude = position.coords.longitude.toString();
+        
             try {
                 await submitPetLocation(petId, { latitude, longitude });
                 alert('Location submitted successfully. Thank you!');
