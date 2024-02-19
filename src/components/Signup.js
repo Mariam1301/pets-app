@@ -17,7 +17,6 @@ export default function Signup() {
     const [error, setError] = useState('');
 
     const validateFields = () => {
-        // Add or modify validation rules specific to signup, e.g., confirm password
         if (!signupState.email) {
             return "Email is required.";
         } else if (!/\S+@\S+\.\S+/.test(signupState.email)) {
@@ -30,6 +29,10 @@ export default function Signup() {
             return "Password must be at least 8 characters long.";
         } else if (signupState.password !== signupState.password_confirmation) {
             return "Passwords do not match.";
+        } else if (!signupState.mobile) {
+            return "Mobile number is required.";
+        } else if (!/^(\+\d{3}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{3}$/.test(signupState.mobile)) {
+            return "Mobile number is invalid.";
         }
         return null;
     };
@@ -50,12 +53,12 @@ export default function Signup() {
         setError('');
     
         try {
-            const data = await signup(signupState); // Call the signup API
-            localStorage.setItem('token', data.token); // Assuming the signup API also returns a token
-            setSignupState(fieldsState); // Reset form state
-            navigate('/home'); // Redirect on success
+            const data = await signup(signupState);
+            localStorage.setItem('token', data.token);
+            setSignupState(fieldsState);
+            navigate('/home');
         } catch (error) {
-            setError(error.message); // Handle signup errors
+            setError(error.message);
         } finally {
             setLoading(false);
         }

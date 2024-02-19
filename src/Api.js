@@ -175,6 +175,58 @@ export const fetchPetLocations = async (petId) => {
     }
     return response.json();
 };
+
+export const fetchPetOwnerDetails = async (token) => {
+  const response = await fetch(`${API_BASE_URL}/pet-details/${token}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Failed to fetch pet owner details');
+  }
+  return response.json();
+};
+
+export const updateUserDetails = async (userData) => {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${API_BASE_URL}/user`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(userData)
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to update user details');
+  }
+
+  console.log('test');
+
+  return response.json();
+};
+
+export const fetchUserDetails = async () => {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${API_BASE_URL}/user`, {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+      },
+  });
+
+  console.log(response);
+
+  if (!response.ok) {
+      throw new Error('Failed to fetch user details');
+  }
+
+  return response.json();
+};
+
   
 
 

@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import ProtectedRoute from './components/ProtectedRoute';
 import PetLocation from './pages/PetLocation';
 import Tracker from './components/Tracker';
+import UserSettingsPage from './pages/UserSettings';
 import { GlobalState } from './context/GlobalContext';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/edit-pet/:id" element={<ProtectedRoute><EditPet /></ProtectedRoute>} />
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/pet-location/:petId" element={<PetLocation />} /> 
+          <Route path="/user-settings" element={<ProtectedRoute><UserSettingsPage /></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </GlobalState>

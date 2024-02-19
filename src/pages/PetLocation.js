@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { submitPetLocation } from '../Api';
+import { useParams } from 'react-router-dom';
+import { submitPetLocation, fetchPetOwnerDetails } from '../Api';
+import OwnerDetailsCard from '../components/OwnerDetailsCard';
 
 export default function PetLocation() {
     const { petId } = useParams();
-    const navigate = useNavigate();
     const [statusMessage, setStatusMessage] = useState('');
+    const [ownerDetails, setOwnerDetails] = useState(null);
+    const [alertShown, setAlertShown] = useState(false);
 
     useEffect(() => {
         const handleSuccess = async (position) => {
@@ -14,8 +16,13 @@ export default function PetLocation() {
         
             try {
                 await submitPetLocation(petId, { latitude, longitude });
-                alert('Location submitted successfully. Thank you!');
-                navigate('/home');
+                if (!alertShown) {
+                    alert('Location submitted successfully. Thank you!');
+                    setAlertShown(true);
+                }
+                const fetchedOwnerDetails = await fetchPetOwnerDetails(petId);
+                setOwnerDetails(fetchedOwnerDetails);
+                setStatusMessage('');
             } catch (error) {
                 setStatusMessage(error.message || 'Failed to submit location data.');
             }
@@ -44,11 +51,12 @@ export default function PetLocation() {
             setStatusMessage('Fetching location...');
             navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
         }
-    }, [petId, navigate]);
+    }, [petId]);
 
     return (
         <div className="text-center mt-20">
-            <p>{statusMessage}</p>
+            {statusMessage && <p>{statusMessage}</p>}
+            {ownerDetails && <OwnerDetailsCard ownerDetails={ownerDetails} />}
         </div>
     );
 }
