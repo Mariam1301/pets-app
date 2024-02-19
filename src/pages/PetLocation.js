@@ -21,6 +21,7 @@ export default function PetLocation() {
                     setAlertShown(true);
                 }
                 const fetchedOwnerDetails = await fetchPetOwnerDetails(petId);
+                console.log(fetchedOwnerDetails);
                 setOwnerDetails(fetchedOwnerDetails);
                 setStatusMessage('');
             } catch (error) {
