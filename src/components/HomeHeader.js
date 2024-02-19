@@ -17,7 +17,7 @@ const HomeHeader = () => {
     return (
         <header className="bg-blue-500 text-white p-4">
             <nav className="container mx-auto flex justify-between items-center">
-                <h1 className="text-lg">Pet Tracker</h1>
+                <h1 className="text-lg"></h1>
                 <div className="flex items-center">
                     <button onClick={handleUserSettings} className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
                         <span>User Settings</span>

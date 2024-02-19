@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchUserDetails, updateUserDetails } from '../Api';
 import { userSettingsFields } from '../constants/formFields';
 import Input from '../components/Input';
+import HomeHeader from '../components/HomeHeader';
 
 const UserSettingsPage = () => {
     const navigate = useNavigate();
@@ -43,22 +44,35 @@ const UserSettingsPage = () => {
         }
     };
 
+    const handleClick = () => {
+        navigate('/home');
+    }
+
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <form onSubmit={handleSubmit} className="space-y-4" style={{ width: '100%', maxWidth: '400px' }}>
-                {userSettingsFields.map(field => (
-                    <Input
-                        key={field.id}
-                        handleChange={handleChange}
-                        value={userData[field.name]}
-                        {...field}
-                    />
-                ))}
-                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Update Details
-                </button>
-            </form>
-        </div>
+        <>
+            <HomeHeader />
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <form onSubmit={handleSubmit} className="space-y-4" style={{ width: '100%', maxWidth: '400px' }}>
+                    {userSettingsFields.map(field => (
+                        <Input
+                            key={field.id}
+                            handleChange={handleChange}
+                            value={userData[field.name]}
+                            {...field}
+                        />
+                    ))}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                            Update Details
+                        </button>
+                        <button onClick={handleClick} className="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </>
+
     );
 };
 
