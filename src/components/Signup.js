@@ -65,8 +65,8 @@ export default function Signup() {
     };
     
     return (
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            <div className="-space-y-px">
+        <form className="mt-8 gap-y-6" onSubmit={handleSubmit}>
+            <div className="-gap-y-px gap-y-2">
                 {fields.map(field =>
                     <Input
                         key={field.id}

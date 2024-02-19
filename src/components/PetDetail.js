@@ -25,23 +25,24 @@ const PetDetail = ({ pet, onRemovePet }) => {
       )}
     </div>
     <div className="flex flex-col sm:flex-row sm:justify-between">
-      <div className="flex flex-col ">
-        <button 
-          onClick={() => onRemovePet(pet.id)} 
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-[100px] mb-2 sm:mb-0 sm:mr-2">
-            Delete
-        </button>
-        <button 
-          className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded w-[100px] mb-2 sm:mb-0 sm:mr-2"
-          onClick={() => navigate(`/edit-pet/${pet.id}`)}>
-            Edit
-        </button>
-        <button 
-          onClick={handleNavigateToTracker}
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-[100px]">
-            Location
-        </button>
-      </div>
+    <div className="flex flex-col space-y-2">
+      <button 
+        onClick={() => onRemovePet(pet.id)} 
+        className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded w-full transition-colors duration-150">
+          Delete
+      </button>
+      <button 
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full transition-colors duration-150"
+        onClick={() => navigate(`/edit-pet/${pet.id}`)}>
+          Edit
+      </button>
+      <button 
+        onClick={handleNavigateToTracker}
+        className="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full transition-colors duration-150">
+          Location
+      </button>
+    </div>
+
     </div>
     </div>
   );

@@ -31,8 +31,7 @@ const signupFields=[
         autoComplete:"name",
         isRequired:true,
         placeholder:"name"   
-    },
-    {
+    },{
         labelText:"Email address",
         labelFor:"email",
         id:"email",
@@ -48,7 +47,7 @@ const signupFields=[
         id:"password",
         name:"password",
         type:"password",
-        autoComplete:"passord",
+        autoComplete:"current-password",
         isRequired:true,
         placeholder:"Password"   
     },
