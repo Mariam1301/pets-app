@@ -86,16 +86,6 @@ const signupFields=[
 
 const userSettingsFields = [
     {
-        labelText: "Email Address",
-        labelFor: "email",
-        id: "email",
-        name: "email",
-        type: "email",
-        autoComplete: "email",
-        isRequired: true,
-        placeholder: "Email Address"
-    },
-    {
         labelText: "Name",
         labelFor: "name",
         id: "name",

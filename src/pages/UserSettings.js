@@ -7,7 +7,6 @@ import Input from '../components/Input';
 const UserSettingsPage = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
-        email: '',
         name: '',
         mobile: '',
         comment: ''
@@ -18,7 +17,7 @@ const UserSettingsPage = () => {
             try {
                 const userDetails = await fetchUserDetails();
                 const updatedUserData = userSettingsFields.reduce((acc, field) => {
-                    acc[field.name] = userDetails[field.name] || '';
+                    acc[field.name] = userDetails[field.name] !== null ? userDetails[field.name] : '';
                     return acc;
                 }, {});
                 setUserData(updatedUserData);
