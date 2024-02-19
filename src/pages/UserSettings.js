@@ -44,19 +44,21 @@ const UserSettingsPage = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
-            {userSettingsFields.map(field => (
-                <Input
-                    key={field.id}
-                    handleChange={handleChange}
-                    value={userData[field.name]}
-                    {...field}
-                />
-            ))}
-            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Update Details
-            </button>
-        </form>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <form onSubmit={handleSubmit} className="space-y-4" style={{ width: '100%', maxWidth: '400px' }}>
+                {userSettingsFields.map(field => (
+                    <Input
+                        key={field.id}
+                        handleChange={handleChange}
+                        value={userData[field.name]}
+                        {...field}
+                    />
+                ))}
+                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Update Details
+                </button>
+            </form>
+        </div>
     );
 };
 
