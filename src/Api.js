@@ -156,7 +156,7 @@ export const fetchPetLocations = async (petId) => {
 
   export const signup = async (signupDetails) => {
     console.log(process.env.REACT_APP_API_BASE_URL)
-    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/register`, {
+    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/complete-registration`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -226,6 +226,24 @@ export const fetchUserDetails = async () => {
 
   return response.json();
 };
+
+export const sendVerificationCode = async (userData) => {
+  const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/send-verification-code`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+  });
+
+  if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to send verification code: ${errorText}`);
+  }
+
+  return response.json();
+};
+
 
   
 

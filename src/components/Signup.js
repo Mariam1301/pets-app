@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { signupFields } from "../constants/formFields"; // Assume this is defined similarly to loginFields but for signup
+import { signupFields } from "../constants/formFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
 import { useNavigate } from 'react-router-dom';
-import { signup } from '../Api'; // Assuming you have a signup function in your API similar to login
+import { signup, sendVerificationCode } from '../Api';
+import MobileInputWithButton from './MobileInputWithButton';
+import { transformEmptyStringsToNull } from '../utils/transformInput';
 
-const fields = signupFields; // Use signup specific fields
+const fields = signupFields;
 let fieldsState = {};
 fields.forEach(field => fieldsState[field.id] = '');
 
@@ -41,8 +43,26 @@ export default function Signup() {
         setSignupState({ ...signupState, [e.target.id]: e.target.value });
     };
 
+    const handleMobileChange = (mobileNumber) => {
+        setSignupState({ ...signupState, mobile: mobileNumber });
+    };
+
+    const handleSendCode = async (mobile) => {
+        setLoading(true);
+        try {
+            await sendVerificationCode({ mobile });
+            alert('Verification code sent! Please check your messages.');
+            setLoading(false);
+        } catch (error) {
+            console.error('Error sending verification code:', error);
+            setError('Failed to send verification code. Please try again.');
+            setLoading(false);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const transformedState = transformEmptyStringsToNull(signupState);
         const validationError = validateFields();
         if (validationError) {
             setError(validationError);
@@ -67,19 +87,25 @@ export default function Signup() {
     return (
         <form className="mt-8 gap-y-6" onSubmit={handleSubmit}>
             <div className="-gap-y-px gap-y-2">
-                {fields.map(field =>
-                    <Input
-                        key={field.id}
-                        handleChange={handleChange}
-                        value={signupState[field.id]}
-                        labelText={field.labelText}
-                        labelFor={field.labelFor}
-                        id={field.id}
-                        name={field.name}
-                        type={field.type}
-                        isRequired={field.isRequired}
-                        placeholder={field.placeholder}
-                    />
+                {fields.map(field => {
+                        if(field.id == 'mobile') {
+                            return <MobileInputWithButton key={field.id} onSendCode={handleSendCode} onMobileChange={handleMobileChange}/>;
+                        }else{
+                            return <Input
+                                key={field.id}
+                                handleChange={handleChange}
+                                value={signupState[field.id]}
+                                labelText={field.labelText}
+                                labelFor={field.labelFor}
+                                id={field.id}
+                                name={field.name}
+                                type={field.type}
+                                isRequired={field.isRequired}
+                                placeholder={field.placeholder}
+                            />
+                        }
+                    }
+                    
                 )}
             </div>
 

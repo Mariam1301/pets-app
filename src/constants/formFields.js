@@ -70,6 +70,17 @@ const signupFields=[
         autoComplete: "mobile",
         isRequired: true,
         placeholder: "Mobile Number"
+        
+    },
+    {
+        labelText: "Verification Code",
+        labelFor: "verification_code",
+        id: "verification_code",
+        name: "verification_code",
+        type: "text",
+        autoComplete: "off",
+        isRequired: false,
+        placeholder: "Verification Code (Enter after SMS received)"
     },
     {
         labelText: "Comment",
