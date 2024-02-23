@@ -33,8 +33,8 @@ export default function Signup() {
             return "Passwords do not match.";
         } else if (!signupState.mobile) {
             return "Mobile number is required.";
-        } else if (!/^(\+\d{3}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{3}$/.test(signupState.mobile)) {
-            return "Mobile number is invalid.";
+        } else if (!/^\+9955\d{2}(\s?\d{3}\s?\d{3}|\s?\d{2}\s?\d{2}\s?\d{2})$/.test(signupState.mobile)) {
+            return "Mobile number is invalid. Please use the format +9955XXXXXXXX.";
         }
         return null;
     };
